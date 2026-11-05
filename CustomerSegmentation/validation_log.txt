@@ -1,0 +1,78 @@
+Return code: 0
+
+STDOUT:
+============================================================
+CUSTOMER SEGMENTATION AND PREDICTIVE ANALYTICS SYSTEM
+============================================================
+Data source: anonymized sample CSV
+Analysis date: 2026-10-28 (fixed for reproducible sample results)
+
+=== RFM TABLE ===
+customer_code LastPurchase  Frequency  Monetary  Recency              Segment
+         C001   2026-10-20          4      4600        8    High-Value Active
+         C002   2026-05-01          2      1000      180   At Risk / Inactive
+         C003   2026-10-18          4      5900       10    High-Value Active
+         C004   2026-07-01          2       800      119   At Risk / Inactive
+         C005   2026-10-21          3      9200        7    High-Value Active
+         C006   2026-10-22          1       200        6      New or One-Time
+         C007   2026-08-15          2      1900       74 Regular / Developing
+         C008   2026-10-01          2      2200       27 Regular / Developing
+         C009   2026-02-01          1       300      269   At Risk / Inactive
+         C010   2026-10-19          3      8800        9    High-Value Active
+         C011   2026-08-05          2      1700       84 Regular / Developing
+         C012   2026-10-12          1      2100       16      New or One-Time
+         C013   2026-10-23          3      9300        5    High-Value Active
+         C014   2026-04-01          2      1100      210   At Risk / Inactive
+         C015   2026-10-24          3      8200        4    High-Value Active
+         C016   2026-06-20          2      2200      130   At Risk / Inactive
+         C017   2026-10-09          3      8700       19    High-Value Active
+         C018   2026-03-01          1       200      241   At Risk / Inactive
+         C019   2026-10-25          3      8300        3    High-Value Active
+         C020   2026-07-28          2      1450       92   At Risk / Inactive
+
+=== RULE-BASED SEGMENT PROFILES ===
+             Segment  CustomerCount  AverageRecency  AverageFrequency  AverageSpending  TotalSpending
+  At Risk / Inactive              7          177.29              1.71          1007.14           7050
+   High-Value Active              8            8.12              3.25          7875.00          63000
+     New or One-Time              2           11.00              1.00          1150.00           2300
+Regular / Developing              3           61.67              2.00          1933.33           5800
+
+Silhouette score (k=3): 0.582
+
+=== K-MEANS CLUSTER PROFILES ===
+ KMeansCluster  CustomerCount  AverageRecency  AverageFrequency  AverageSpending  TotalSpending
+             0              4          225.00              1.50           650.00           2600
+             1              8            8.12              3.25          7875.00          63000
+             2              8           68.50              1.75          1568.75          12550
+
+Candidate k evaluation saved to outputs/kmeans_evaluation.csv
+Charts saved in the outputs folder.
+
+=== METHOD COMPARISON (first 10 customers) ===
+customer_code              Segment  KMeansCluster
+         C001    High-Value Active              1
+         C002   At Risk / Inactive              0
+         C003    High-Value Active              1
+         C004   At Risk / Inactive              2
+         C005    High-Value Active              1
+         C006      New or One-Time              2
+         C007 Regular / Developing              2
+         C008 Regular / Developing              2
+         C009   At Risk / Inactive              0
+         C010    High-Value Active              1
+
+Done. Open the outputs folder to view CSV files and charts.
+Reminder: these groups describe observed behavior, not guaranteed future actions.
+
+
+STDERR:
+Spreadsheet runtime warmup failed during python startup
+Traceback (most recent call last):
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/patches/warm_spreadsheet_runtime_on_startup.py", line 26, in warm_spreadsheet_runtime_on_startup
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 785, in warm_spreadsheet_runtime
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 718, in _warm_feature_flows
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 509, in _warm_drawing_and_image_flows
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/generated/interface/models.py", line 32861, in bring_to_front
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/remote.py", line 764, in __call__
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/client.py", line 175, in call
+artifact_tool.rpc.client.RemoteError: Element ordering requires an owning element collection.
